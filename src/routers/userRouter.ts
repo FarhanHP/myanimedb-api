@@ -11,8 +11,8 @@ interface RegisterBody {
 
 const router = Router();
 
-// registering googletoken
-router.post('/register', async (req, res, next) => {
+// login with google
+router.post('/login/google', async (req, res, next) => {
   try {
     const db: Db = res.locals.db;
     const userCollection = db.collection('user');
@@ -72,6 +72,11 @@ router.post('/register', async (req, res, next) => {
 
       res.status(200).send({
         loginToken: `Bearer ${loginToken}`,
+        data: {
+          email: email,
+          imageUri: picture,
+          fullname: name,
+        }
       });
       return
     } 
