@@ -14,11 +14,11 @@ router.get('/:offset/:limit', async (req, res, next) => {
     const { query, params } = req;
     const { keyword } = query;
     const { offset, limit } = params;
-    const { logintoken } = req.headers;
+    const { authorization } = req.headers;
     let userId: ObjectId;
     
-    if(logintoken) {
-      const user = await isValidAndDecodeToken(logintoken as string);
+    if(authorization) {
+      const user = await isValidAndDecodeToken(authorization);
       userId = user._id;
     }
 

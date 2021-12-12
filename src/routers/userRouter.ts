@@ -71,7 +71,7 @@ router.post('/register', async (req, res, next) => {
       const loginToken = await generateToken(userObject);
 
       res.status(200).send({
-        loginToken,
+        loginToken: `Bearer ${loginToken}`,
       });
       return
     } 

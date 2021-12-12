@@ -14,18 +14,23 @@ export const generateToken = (payload: User): Promise<String> =>
       exp: Math.floor(Date.now()/1000) + TOKEN_EXPIRE
     }, SECRET);
 
+// token: `Bearer ${token}`
 export const isValidAndDecodeToken = async (token: string): Promise<User> => {
-  const payload = jwt.verify(token, SECRET)
-  const now = Date.now() / 1000;
+  const [scheme, parameter] = token.split(' ');
   
-  if(payload.exp > now) {
-    return {
-      _id: new ObjectId(payload._id as string),
-      createdAt: payload.createdAt as number,
-      updatedAt: payload.updatedAt as number,
-      email: payload.email as string,
-      imageUri: payload.imageUri as string,
-      fullname: payload.fullname as string,
+  if(scheme === 'Bearer') {
+    const payload = jwt.verify(parameter, SECRET)
+    const now = Date.now() / 1000;
+    
+    if(payload.exp > now) {
+      return {
+        _id: new ObjectId(payload._id as string),
+        createdAt: payload.createdAt as number,
+        updatedAt: payload.updatedAt as number,
+        email: payload.email as string,
+        imageUri: payload.imageUri as string,
+        fullname: payload.fullname as string,
+      }
     }
   }
 

@@ -8,9 +8,9 @@ const router = Router();
 
 router.use( async (req, res, next) => {
   try {
-    const { logintoken }  = req.headers;
-    if(logintoken) {
-      const loginUser = await isValidAndDecodeToken(logintoken as string);
+    const { authorization }  = req.headers;
+    if(authorization) {
+      const loginUser = await isValidAndDecodeToken(authorization);
 
       if(loginUser) {
         res.locals.loginUser = loginUser;
