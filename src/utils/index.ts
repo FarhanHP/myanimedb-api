@@ -11,22 +11,10 @@ export const animeDataArrToAnimeArr = async (animeDataArr: AnimeData[], db: Db, 
   const animeIds: string[] = [];
 
   const animeArr: Anime[] = animeDataArr.map((value) => {
-    const { attributes, id } = value;
-    const { titles, description, posterImage, episodeCount, youtubeVideoId } = attributes;
-    animeIds.push(id);
+    const anime = animeDataToRawAnime(value)
+    animeIds.push(anime.id);
 
-    return {
-      id,
-      title: titles.en_jp,
-      description: description,
-      imageUrl: posterImage.small,
-      videoUrl: youtubeVideoId ? `https://www.youtube.com/watch?v=${youtubeVideoId}` : null,
-      episodeCount,
-      isFavorite: false,
-      userCount: 0,
-      scoreGiven: -1,
-      score: 0,
-    };
+    return anime
   });
 
   const promisesOutput = {}
@@ -148,9 +136,9 @@ export const getAnimeById = async (animeId: string, db: Db, userId?:ObjectId): P
 // return Anime without checking score, scoreGiven, isFavorite, and userCount in database
 const animeDataToRawAnime = (animeData: AnimeData): Anime => {
   const { id, attributes } = animeData;
-  const { description, titles, posterImage } = attributes;
+  const { description, titles, posterImage, episodeCount, youtubeVideoId } = attributes;
+  
   let title: string = titles.en_jp
-
   if(!title) {
     const titleValues = Object.values(titles)
 
@@ -163,14 +151,16 @@ const animeDataToRawAnime = (animeData: AnimeData): Anime => {
 
   return {
     id,
-    description,
+    title: titles.en_jp,
+    description: description,
     imageUrl: posterImage.small,
-    title,
-    score: 0,
-    scoreGiven: -1,
+    videoUrl: youtubeVideoId ? `https://www.youtube.com/watch?v=${youtubeVideoId}` : null,
+    episodeCount,
     isFavorite: false,
     userCount: 0,
-  }
+    scoreGiven: -1,
+    score: 0,
+  };
 };
 
 export const updateAnimeScore = async (animeId: string, db: Db): Promise<{
