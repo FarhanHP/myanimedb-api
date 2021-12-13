@@ -16,9 +16,7 @@ export interface Anime {
 export interface AnimeData {
   id: string,
   attributes: {
-    titles: {
-      en_jp: string,
-    },
+    titles: any,
     description: string,
     posterImage: {
       small: string,

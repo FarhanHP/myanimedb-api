@@ -149,12 +149,23 @@ export const getAnimeById = async (animeId: string, db: Db, userId?:ObjectId): P
 const animeDataToRawAnime = (animeData: AnimeData): Anime => {
   const { id, attributes } = animeData;
   const { description, titles, posterImage } = attributes;
+  let title: string = titles.en_jp
+
+  if(!title) {
+    const titleValues = Object.values(titles)
+
+    if(titleValues.length > 0) {
+      title = titleValues[0] as string
+    } else {
+      title = ''
+    }
+  }
 
   return {
     id,
     description,
     imageUrl: posterImage.small,
-    title: titles.en_jp,
+    title,
     score: 0,
     scoreGiven: -1,
     isFavorite: false,
