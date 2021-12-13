@@ -21,6 +21,4 @@ export const getAnimeDataById = async (animeId: string): Promise<AnimeData> => {
     const animeData: AnimeData = (await res.json()).data;
     return animeData;
   }
-
-  return;
 }

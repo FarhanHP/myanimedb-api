@@ -6,9 +6,7 @@ import deleteFavoriteAnime from './handlers/deleteFavoriteAnime';
 const router = Router();
 
 router.get('/', getFavoriteAnime)
-
 router.post('/add/:id', addFavoriteAnime);
-
 router.delete('/delete/:id', deleteFavoriteAnime)
 
 export default router;

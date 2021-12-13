@@ -33,6 +33,4 @@ export const isValidAndDecodeToken = async (token: string): Promise<User> => {
       }
     }
   }
-
-  return undefined;
 }

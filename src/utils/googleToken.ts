@@ -12,6 +12,4 @@ export const isValidAndDecodeGoogleToken = async (token: string): Promise<Decode
       return json;
     }
   }
-
-  return undefined;
 }

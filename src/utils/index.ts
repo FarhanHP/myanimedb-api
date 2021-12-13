@@ -143,8 +143,6 @@ export const getAnimeById = async (animeId: string, db: Db, userId?:ObjectId): P
   if(animeData) {
     return animeDataToAnime(animeData, db, userId)
   }
-
-  return undefined;
 };
 
 // return Anime without checking score, scoreGiven, isFavorite, and userCount in database
