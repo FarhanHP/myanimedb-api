@@ -19,7 +19,9 @@ router.get('/:offset/:limit', async (req, res, next) => {
     
     if(authorization) {
       const user = await isValidAndDecodeToken(authorization);
-      userId = user._id;
+      if(user) {
+        userId = user._id;
+      }
     }
 
     const response = await getAnime(Number(offset), Number(limit), keyword as string);
