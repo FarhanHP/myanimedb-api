@@ -28,11 +28,11 @@ const handler: Handler = async (req, res, next) => {
       res.status(200).send({
         count: favoriteAnimeCount,
         data: animeArr,
-      })
+      });
     }
   } catch(err) {
     console.log(err);
-    res.status(500).send()
+    res.status(500).send();
   }
 
   next();

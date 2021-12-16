@@ -199,4 +199,9 @@ export const updateAnimeScore = async (animeId: string, db: Db): Promise<{
     newAverageScore,
     newUserCount: count,
   };
+};
+
+export const isValidScore = (score: number) => {
+  return score > 0 && score <= 10;
 }
+

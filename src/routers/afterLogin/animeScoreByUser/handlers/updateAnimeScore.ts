@@ -1,7 +1,7 @@
 import { Handler } from 'express';
 import { Db } from 'mongodb';
 import { User } from '../../../../interfaces';
-import { updateAnimeScore } from '../../../../utils';
+import { isValidScore, updateAnimeScore } from '../../../../utils';
 
 const handler: Handler = async (req, res, next) => {
   try {
@@ -14,7 +14,7 @@ const handler: Handler = async (req, res, next) => {
     if(loginUser) {
       const { score } = req.body;
 
-      if(score) {
+      if(score && isValidScore(score)) {
         const now = Date.now();
 
         const response = await animeScoreByUserCollection.updateOne({
