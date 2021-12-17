@@ -5,7 +5,7 @@ export interface Anime {
   description: string,
   title: string,
   imageUrl: string,
-  videoUrl?: string,
+  youtubeVideoId?: string,
   episodeCount?: number,
   score: number,
   userCount: number,

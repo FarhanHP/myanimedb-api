@@ -154,7 +154,7 @@ const animeDataToRawAnime = (animeData: AnimeData): Anime => {
     title,
     description: description,
     imageUrl: posterImage.small,
-    videoUrl: youtubeVideoId ? `https://www.youtube.com/watch?v=${youtubeVideoId}` : null,
+    youtubeVideoId: youtubeVideoId ? youtubeVideoId : null,
     episodeCount,
     isFavorite: false,
     userCount: 0,
